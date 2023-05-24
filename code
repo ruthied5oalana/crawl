@@ -1,0 +1,55 @@
+import datetime
+
+# Function to display the menu options
+def display_menu():
+    print("------ Task Tracker ------")
+    print("1. Add a task")
+    print("2. View today's tasks")
+    print("3. Exit")
+
+# Function to add a task
+def add_task():
+    task = input("Enter the task: ")
+    with open("tasks.txt", "a") as file:
+        file.write(f"{datetime.date.today()}: {task}\n")
+    print("Task added successfully!")
+
+# Function to view today's tasks
+def view_tasks():
+    with open("tasks.txt", "r") as file:
+        tasks = file.readlines()
+        today = datetime.date.today()
+        today_tasks = [task.strip() for task in tasks if task.startswith(str(today))]
+        if today_tasks:
+            print(f"------ Today's Tasks ({today}) ------")
+            for task in today_tasks:
+                print(task)
+        else:
+            print("No tasks for today.")
+
+# Main function
+def main():
+    while True:
+        display_menu()
+        choice = input("Enter your choice (1-3): ")
+        if choice == "1":
+            add_task()
+        elif choice == "2":
+            view_tasks()
+        elif choice == "3":
+            print("Exiting...")
+            break
+        else:
+            print("Invalid choice. Please try again.")
+
+# Run the program
+if __name__ == "__main__":
+    main()
+To use this script:
+
+Save the code into a Python file (e.g., task_tracker.py).
+Make sure you have write access to the directory where the script is located.
+Run the script using a Python interpreter.
+Follow the menu options to add tasks or view today's tasks.
+The tasks will be stored in a file named tasks.txt in the same directory as the script.
+Please note that this script assumes a basic command-line interface. You can modify and enhance it further based on your specific requirements and preferences.
